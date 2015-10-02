@@ -8,5 +8,8 @@ node[:deploy].each do |application, deploy|
     php composer.phar install --no-dev --no-interaction --prefer-dist
     EOH
     only_if { ::File.exist?("#{deploy[:deploy_to]}/current/composer.json")}
+    code <<-EOH
+    laravel new recipe
+    EOH
   end
 end
