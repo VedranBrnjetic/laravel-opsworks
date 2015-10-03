@@ -9,6 +9,7 @@ node[:deploy].each do |application, deploy|
     EOH
     only_if { ::File.exist?("#{deploy[:deploy_to]}/current/composer.json")}
     code <<-EOH
+    composer global require "laravel/installer=~1.1"
     laravel new recipe
     EOH
   end
