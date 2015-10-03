@@ -7,10 +7,11 @@ node[:deploy].each do |application, deploy|
     curl -s https://getcomposer.org/installer | php
     php composer.phar install --no-dev --no-interaction --prefer-dist
     EOH
-    only_if { ::File.exist?("#{deploy[:deploy_to]}/current/composer.json")}
     code <<-EOH
     composer global require "laravel/installer=~1.1"
     laravel new recipe
     EOH
+    only_if { ::File.exist?("#{deploy[:deploy_to]}/current/composer.json")}
+
   end
 end
